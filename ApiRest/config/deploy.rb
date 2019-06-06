@@ -2,10 +2,12 @@
 lock "~> 3.11.0"
 
 set :application, "eyespay"
-set :repo_url, "https://github.com/OscarUtreras/EyesPay_RubyOnRails"
+set :repo_url, "git@github.com:OscarUtreras/EyesPay_RubyOnRails.git"    
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
+
+server '3.14.146.252', user: 'ubuntu', roles: %w{web app}
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 

@@ -1,0 +1,7 @@
+Category.create(name: "Alimentos y bebidas no alcohólicas")
+Category.create(name: "Bebidas alcohólicas, tabaco y estupefacientes")
+Category.create(name: "Prendas de vestir y calzado")
+Category.create(name: "Muebles artículos para el hogar y la conservación ordinaria del hogar")
+Category.create(name: "Recreación y cultura")
+Category.create(name: "Educación")
+Category.create(name: "Otros")
