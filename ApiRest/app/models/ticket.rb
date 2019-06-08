@@ -1,4 +1,3 @@
 class Ticket < ApplicationRecord
-    belongs_to :budget
-    has_many :has_products
+    has_many :product_instances
 end

@@ -1,1 +1,1 @@
-#Product.create()
+Product.create(name: "Arroz Tucapel", categorized: true, category_id: Category.find_by_name("Alimentos y bebidas no alcohólicas").id)
