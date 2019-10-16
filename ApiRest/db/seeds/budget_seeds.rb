@@ -1,2 +1,2 @@
-Budget.create(limit: 300000, total: 300000, category: Category.find_by_name("Alimentos y bebidas no alcohólicas").id, user: User.find_by_name("Test"))
-Budget.create(limit: 400000, total: 250000, category: Category.find_by_name("Otros").id, user: User.find_by_name("Test"))
+Budget.create(max: 300000, current: 100000, id_category: 1, user_id: 2)
+Budget.create(max: 400000, current: 100000, id_category: 2, user_id: 2)

@@ -10,6 +10,15 @@ module Api
                 @budgets = Budget.where(user_id: params[:id])
                 render :json => @budgets
             end
+
+            def create
+                @budget = Budget.create!(budget_params)
+                json_response(@budget, :created) 
+            end
+
+            def budget_params
+                params.permit(:limit, :total, :category, :user)
+            end
         end
     end
 end

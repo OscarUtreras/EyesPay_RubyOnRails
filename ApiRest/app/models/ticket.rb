@@ -1,3 +1,4 @@
 class Ticket < ApplicationRecord
-    has_many :product_instances
+    belongs_to :user
+    has_many :purchases
 end

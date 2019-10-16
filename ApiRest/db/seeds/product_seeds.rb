@@ -1,1 +1,1 @@
-Product.create(name: "Arroz Tucapel", categorized: true, category_id: Category.find_by_name("Alimentos y bebidas no alcohólicas").id)
+Product.create(active: true, name: "Arroz Tucapel", description: "Arroz grano largo grado 2.", positive: 2, negative: 1)

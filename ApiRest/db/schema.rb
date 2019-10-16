@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_180414) do
+ActiveRecord::Schema.define(version: 2019_10_16_211130) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "category"
-    t.integer "limit"
-    t.integer "total"
+    t.integer "max"
+    t.integer "current"
+    t.integer "id_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -28,32 +28,23 @@ ActiveRecord::Schema.define(version: 2019_06_08_180414) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categorizations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "category"
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.boolean "active"
+    t.string "name"
+    t.text "description"
+    t.integer "positive"
+    t.integer "negative"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "product_id"
-    t.index ["product_id"], name: "index_categorizations_on_product_id"
-    t.index ["user_id"], name: "index_categorizations_on_user_id"
   end
 
-  create_table "product_instances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "price"
-    t.integer "product"
+    t.integer "id_product"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ticket_id"
-    t.index ["ticket_id"], name: "index_product_instances_on_ticket_id"
-  end
-
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.boolean "categorized"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "category_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["ticket_id"], name: "index_purchases_on_ticket_id"
   end
 
   create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,18 +57,14 @@ ActiveRecord::Schema.define(version: 2019_06_08_180414) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.string "lastname"
     t.string "password"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "token"
-    t.index ["token"], name: "index_users_on_token"
   end
 
   add_foreign_key "budgets", "users"
-  add_foreign_key "categorizations", "products"
-  add_foreign_key "categorizations", "users"
-  add_foreign_key "product_instances", "tickets"
-  add_foreign_key "products", "categories"
+  add_foreign_key "purchases", "tickets"
   add_foreign_key "tickets", "users"
 end

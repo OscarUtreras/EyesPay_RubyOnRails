@@ -1,3 +1,4 @@
+Category.create(name: "General")
 Category.create(name: "Alimentos y bebidas no alcohólicas")
 Category.create(name: "Bebidas alcohólicas, tabaco y estupefacientes")
 Category.create(name: "Prendas de vestir y calzado")
