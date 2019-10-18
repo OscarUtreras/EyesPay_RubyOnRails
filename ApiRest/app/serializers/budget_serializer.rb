@@ -1,3 +1,3 @@
 class BudgetSerializer < ActiveModel::Serializer
-    attributes :id, :category, :total, :limit
+    attributes :id, :id_category, :max, :current
 end
