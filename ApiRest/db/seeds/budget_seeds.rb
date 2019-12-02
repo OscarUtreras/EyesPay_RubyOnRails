@@ -1,4 +1,4 @@
-Budget.create(max: 700000, current: 0, id_category: 1, user_id: 1)
+Budget.create(max: 2800000, current: 0, id_category: 1, user_id: 1)
 Budget.create(max: 400000, current: 0, id_category: 2, user_id: 1)
 Budget.create(max: 400000, current: 0, id_category: 3, user_id: 1)
 Budget.create(max: 400000, current: 0, id_category: 4, user_id: 1)

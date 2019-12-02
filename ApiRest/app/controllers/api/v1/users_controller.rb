@@ -6,6 +6,11 @@ def create
       render json: @user.errors, status: :unprocessable_entity
     end
 end
+
+def show
+  @user = User.where(id: params[:id])
+  render :json => @user
+end
  
 private
  
