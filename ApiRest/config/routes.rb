@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :categories
       resources :budgets
       resources :users
+      resources :scan
     end
   end
 end

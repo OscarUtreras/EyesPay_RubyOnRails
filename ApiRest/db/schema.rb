@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_211130) do
+ActiveRecord::Schema.define(version: 2019_12_16_234351) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "max"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 2019_10_16_211130) do
     t.integer "negative"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.string "price"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -65,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_211130) do
   end
 
   add_foreign_key "budgets", "users"
+  add_foreign_key "products", "categories"
   add_foreign_key "purchases", "tickets"
   add_foreign_key "tickets", "users"
 end
