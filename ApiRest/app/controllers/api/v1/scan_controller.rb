@@ -1,5 +1,7 @@
 require 'base64'
 require 'rtesseract'
+require 'rmagick'
+include Magick
 
 module Api
     module V1
@@ -9,10 +11,17 @@ module Api
                 file_name = "somefilename.#{params[:extension]}"
                 new_file=File.new(file_name, 'wb')
                 new_file.write(image_data)
-
+                if params[:extension] == "jpg"
+                    thumb = Magick::Image.read(file_name).first
+                    thumb.format = "PNG"
+                    thumb.rotate!(90)
+                    #File.delete(file_name)
+                    thumb.write("somefilename.png")
+                    file_name = "somefilename.png"
+                end
                 image = RTesseract.new(file_name, lang: 'spa')
                 products = find_products(image.to_s)
-                File.delete(file_name)
+                #File.delete(file_name)
                 render :json => products
             end
         end
@@ -26,7 +35,6 @@ def find_products(data)
         key_words2 = ["DEBITO", "SUB TOTAL", "TOTAL", "VUELTO"]
         lines = data.split("\n")
         cont = 0
-        skip = 0
         products_end = true
         lines.each do |line|
             if cont < 1
@@ -37,21 +45,17 @@ def find_products(data)
                     end
                 end
             elsif products_end == true
-                if skip > 4
-                    key_words2.each do |word|
-                        index = line.index(word)
-                        if index != nil
-                            products_end = false
-                        end
+                key_words2.each do |word|
+                    index = line.index(word)
+                    if index != nil
+                        products_end = false
                     end
-                    if products_end == true
-                        aux = get_products(line)
-                        if  aux != nil
-                            products.push(aux)
-                        end
+                end
+                if products_end == true
+                    aux = get_products(line)
+                    if  aux != nil
+                        products.push(aux)
                     end
-                else
-                    skip = skip + 1
                 end
             end
         end
